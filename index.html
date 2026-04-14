@@ -43,6 +43,139 @@ canvas#bg{position:fixed;inset:0;z-index:0;opacity:.3}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--faint);border:1px solid rgba(255,255,255,.15);transition:.3s;cursor:pointer}
 .dot.on{background:var(--green);border-color:var(--green);width:18px;border-radius:3px;box-shadow:0 0 6px var(--green)}
 
+/* ── NOTES PANEL ── */
+#notesPanel{
+  position:fixed;bottom:0;left:0;right:0;
+  background:#0a0a14;border-top:1px solid var(--border);
+  z-index:200;transform:translateY(100%);
+  transition:transform .4s ease;
+  max-height:42vh;display:flex;flex-direction:column;
+}
+#notesPanel.open{transform:translateY(0)}
+.notes-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 24px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.notes-bar span{font-family:'DM Mono';font-size:11px;color:var(--green);letter-spacing:2px}
+.notes-toggle{
+  position:fixed;bottom:80px;right:32px;z-index:300;
+  background:rgba(0,255,135,.1);border:1px solid var(--borderG);
+  color:var(--green);font-size:12px;padding:6px 14px;border-radius:50px;
+  cursor:pointer;font-family:'DM Mono';letter-spacing:1px;transition:all .2s;
+}
+.notes-toggle:hover{background:rgba(0,255,135,.2)}
+.notes-content{padding:20px 28px;overflow-y:auto;flex:1;font-size:14px;line-height:1.75;color:var(--muted)}
+.notes-content strong{color:var(--white)}
+.notes-content .cue{color:var(--green);font-family:'DM Mono';font-size:11px;letter-spacing:1px;text-transform:uppercase;display:block;margin-top:12px;margin-bottom:4px}
+.notes-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px 8px}
+
+/* ── QA PANEL ── */
+#qaPanel{
+  position:fixed;inset:0;z-index:400;
+  background:rgba(5,5,8,.97);backdrop-filter:blur(8px);
+  display:none;overflow-y:auto;padding:48px 72px;
+}
+#qaPanel.open{display:block}
+.qa-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.qa-title{font-family:'Bebas Neue';font-size:48px;color:var(--white);letter-spacing:1px}
+.qa-title span{color:var(--red)}
+.qa-close{background:none;border:1px solid var(--border);color:var(--muted);font-size:14px;padding:8px 20px;border-radius:50px;cursor:pointer;font-family:inherit;transition:all .2s}
+.qa-close:hover{border-color:var(--red);color:var(--red)}
+.qa-item{background:var(--bg2);border:1px solid var(--border);border-radius:16px;margin-bottom:16px;overflow:hidden}
+.qa-q{
+  padding:18px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-size:15px;font-weight:500;color:var(--white);transition:background .2s;
+}
+.qa-q:hover{background:rgba(255,61,87,.04)}
+.qa-icon{color:var(--red);font-size:18px;flex-shrink:0;transition:transform .3s}
+.qa-item.expanded .qa-icon{transform:rotate(45deg)}
+.qa-a{
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+  padding:0 24px;font-size:14px;color:var(--muted);line-height:1.75;
+}
+.qa-item.expanded .qa-a{max-height:300px;padding:0 24px 20px}
+.qa-a strong{color:var(--green)}
+#qaBtn{
+  position:fixed;bottom:80px;left:32px;z-index:300;
+  background:rgba(255,61,87,.1);border:1px solid rgba(255,61,87,.3);
+  color:var(--red);font-size:12px;padding:6px 14px;border-radius:50px;
+  cursor:pointer;font-family:'DM Mono';letter-spacing:1px;transition:all .2s;
+}
+#qaBtn:hover{background:rgba(255,61,87,.2)}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{font-family:'DM Mono';font-size:11px;letter-spacing:3px;color:var(--green);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--green)}
+.hero{font-family:'Bebas Neue';font-size:clamp(60px,8.5vw,124px);line-height:.93;letter-spacing:1px;margin-bottom:24px}
+.hero .g{color:var(--green)}.hero .r{color:var(--red)}.hero .d{color:rgba(255,255,255,.15)}
+.h2{font-family:'Bebas Neue';font-size:clamp(42px,5.5vw,76px);line-height:1;margin-bottom:28px}
+.h2 .g{color:var(--green)}
+.body{font-size:16px;color:var(--muted);line-height:1.8;max-width:600px}
+.body strong{color:var(--white);font-weight:500}
+.src{font-family:'DM Mono';font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px;margin-top:6px}
+
+/* ── COMPONENTS ── */
+.hl{width:48px;height:2px;background:var(--green);margin-bottom:24px;box-shadow:0 0 8px var(--green)}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:24px 28px;transition:border-color .3s}
+.card:hover{border-color:rgba(0,255,135,.15)}
+.card.lit{border-color:var(--borderG);background:rgba(0,255,135,.04)}
+.card.danger{border-color:rgba(255,61,87,.25);background:rgba(255,61,87,.04)}
+.ctag{font-family:'DM Mono';font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:8px}
+.ctag.r{color:var(--red)}
+.chead{font-size:17px;font-weight:600;color:#fff;margin-bottom:8px}
+.cbody{font-size:13px;color:var(--muted);line-height:1.65}
+.bignum{font-family:'Bebas Neue';line-height:1;background:linear-gradient(135deg,var(--green),#00C9FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.bignum.red{background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;background-clip:text}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:50px;font-size:12px;font-weight:500;border:1px solid var(--border);color:var(--muted);background:var(--bg3)}
+.pill.g{border-color:rgba(0,255,135,.3);color:var(--green);background:var(--green2)}
+.pill.r{border-color:rgba(255,61,87,.3);color:var(--red);background:var(--red2)}
+.brow{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--bg2);border:1px solid var(--border);border-radius:13px;transition:all .25s}
+.brow:hover{border-color:rgba(0,255,135,.2);transform:translateX(4px)}
+.bicon{width:38px;height:38px;border-radius:9px;flex-shrink:0;background:var(--green2);border:1px solid rgba(0,255,135,.2);display:flex;align-items:center;justify-content:center;font-size:17px}
+.btit{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.bdesc{font-size:12px;color:var(--muted);line-height:1.55}
+.quote{border-left:3px solid var(--green);padding:20px 26px;background:rgba(0,255,135,.04);border-radius:0 14px 14px 0;font-size:clamp(15px,1.7vw,19px);color:var(--white);line-height:1.8;font-style:italic;max-width:800px}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* ── SCOPE ── */
+.sr{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);font-size:14px}
+.sr:last-child{border:none}
+.sb{font-family:'DM Mono';font-size:10px;padding:3px 10px;border-radius:50px;letter-spacing:1px}
+.sb.in{background:var(--green2);color:var(--green);border:1px solid rgba(0,255,135,.25)}
+.sb.out{background:var(--red2);color:var(--red);border:1px solid rgba(255,61,87,.25)}
+
+/* ── TIMELINE ── */
+.tl{display:flex;flex-direction:column}
+.tlr{display:flex;gap:14px;align-items:stretch}
+.tls{display:flex;flex-direction:column;align-items:center;width:18px;flex-shrink:0}
+.tlc{width:13px;height:13px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 7px var(--green)}
+.tlv{flex:1;width:1px;background:var(--border);margin:3px 0}
+.tlco{padding-bottom:18px;flex:1}
+.tlp{font-family:'DM Mono';font-size:9px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:2px}
+.tlt{font-size:14px;font-weight:600;color:#fff}
+.tlsub{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ── DASH ── */
+.dm{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:14px 16px}
+.dml{font-family:'DM Mono';font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.dmv{font-family:'Bebas Neue';font-size:30px;line-height:1;color:#fff}
+.dmd{font-size:10px;margin-top:3px}
+.dmd.up{color:#00FF87}.dmd.dn{color:var(--red)}
+.bc{display:flex;align-items:flex-end;gap:4px;height:72px}
+.bcb{flex:1;border-radius:3px 3px 0 0;background:rgba(0,255,135,.12);min-height:5px}
+.bcb.hi{background:var(--green);box-shadow:0 0 6px var(--green)}
+.ar{display:flex;align-items:center;gap:9px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:11px}
+.ad{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.screen{background:#080810;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 0 60px rgba(0,255,135,.05),0 30px 60px rgba(0,0,0,.7)}
+.sbar{background:#0a0a14;padding:10px 16px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.05)}
+.sd{width:8px;height:8px;border-radius:50%}
+.glowdot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.5);opacity:1}}
+
 /* ── RING CLOSING ── */
 .ring{position:absolute;border-radius:50%;border:1px solid rgba(0,255,135,.08);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 20s linear infinite}
 .ring2{position:absolute;border-radius:50%;border:1px solid rgba(0,255,135,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 12s linear infinite reverse}
@@ -385,24 +518,213 @@ canvas#bg{position:fixed;inset:0;z-index:0;opacity:.3}
   <button class="nb" id="next">→</button>
 </div>
 
+<!-- ══ NOTES TOGGLE ══ -->
+<button class="notes-toggle" id="notesToggle">📝 GUIÓN</button>
 
+<!-- ══ QA BUTTON ══ -->
+<button id="qaBtn">⚡ PREGUNTAS DIFÍCILES</button>
 
+<!-- ══ NOTES PANEL ══ -->
+<div id="notesPanel">
+  <div class="notes-bar">
+    <span>📝 GUIÓN — LO QUE DIRÁS</span>
+    <button class="notes-close" id="notesClose">✕</button>
+  </div>
+  <div class="notes-content" id="notesContent"></div>
+</div>
+
+<!-- ══ QA PANEL ══ -->
+<div id="qaPanel">
+  <div class="qa-header">
+    <div class="qa-title">PREGUNTAS <span>DIFÍCILES</span></div>
+    <button class="qa-close" id="qaClose">✕ Cerrar</button>
+  </div>
+  <div id="qaList"></div>
+</div>
 
 <script>
-const cv=document.getElementById('bg'),cx=cv.getContext('2d');let W,H,pts=[];
+/* ── PARTICLE BG ── */
+const cv = document.getElementById('bg');
+const cx = cv.getContext('2d');
+let W,H,pts=[];
 function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}
 function Pt(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.2+.3;this.a=Math.random()*.35+.08}
 Pt.prototype.u=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0)this.x=W;if(this.x>W)this.x=0;if(this.y<0)this.y=H;if(this.y>H)this.y=0};
 rs();for(let i=0;i<100;i++)pts.push(new Pt());window.addEventListener('resize',rs);
-function draw(){cx.clearRect(0,0,W,H);pts.forEach(p=>{p.u();cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(0,255,135,${p.a})`;cx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(0,255,135,${.05*(1-d/90)})`;cx.lineWidth=.4;cx.stroke()}}requestAnimationFrame(draw);}
+function draw(){
+  cx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.u();cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(0,255,135,${p.a})`;cx.fill()});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<90){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(0,255,135,${.05*(1-d/90)})`;cx.lineWidth=.4;cx.stroke()}
+  }
+  requestAnimationFrame(draw);
+}
 draw();
-const slides=document.querySelectorAll('.slide'),total=slides.length;let cur=0;
-const dotsEl=document.getElementById('dots'),progEl=document.getElementById('prog'),snumEl=document.getElementById('snum');
+
+/* ── SLIDES ── */
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+const progEl=document.getElementById('prog');
+const snumEl=document.getElementById('snum');
 for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>go(i);dotsEl.appendChild(d)}
-function go(n){if(n===cur)return;slides[cur].classList.remove('active');slides[cur].classList.add('exit');const p=cur;cur=n;setTimeout(()=>slides[p].classList.remove('exit'),550);slides[cur].classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));progEl.style.width=((cur+1)/total*100)+'%';snumEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');}
+function go(n){
+  if(n===cur)return;
+  slides[cur].classList.remove('active');slides[cur].classList.add('exit');
+  const p=cur;cur=n;
+  setTimeout(()=>slides[p].classList.remove('exit'),550);
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  progEl.style.width=((cur+1)/total*100)+'%';
+  snumEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+  updateNotes();
+}
 document.getElementById('next').onclick=()=>{if(cur<total-1)go(cur+1)};
 document.getElementById('prev').onclick=()=>{if(cur>0)go(cur-1)};
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();if(cur<total-1)go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();if(cur>0)go(cur-1)}});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();if(cur<total-1)go(cur+1)}
+  if(e.key==='ArrowLeft'){e.preventDefault();if(cur>0)go(cur-1)}
+  if(e.key==='n'||e.key==='N')toggleNotes();
+  if(e.key==='Escape'){document.getElementById('qaPanel').classList.remove('open');if(notesOpen)toggleNotes()}
+});
+
+/* ── NOTAS ── */
+const NOTES=[
+  // S1 TÍTULO
+  `<span class="cue">Apertura — ~1 min</span>
+  Abran con fuerza. No empiecen con "buenos días, hoy vamos a hablar de...". Empiecen directo:<br><br>
+  <strong>"¿Cuántos de ustedes han intentado comprar boletos para un concierto y en 30 segundos ya estaban agotados? Eso no fue demanda real. Fue un bot. SARE es la solución a ese problema."</strong><br><br>
+  Presenten el nombre completo: <em>Sistema Anti-Reventa Equitativo — SARE</em>. Mencionen que la presentación tiene datos reales, casos legales vigentes y un prototipo funcional.`,
+
+  // S2 PROBLEMA
+  `<span class="cue">El Problema — ~2 min</span>
+  Aquí generan el dolor. Hablen de los números pero con historia detrás:<br><br>
+  <strong>"El mercado global de reventa alcanzó $3.4 billones de dólares en 2024. No es un problema menor. Es una industria paralela que vive de quitarle el acceso a los fans."</strong><br><br>
+  Cuenten el caso FTC vs. Key Investment Group (2025): <em>"Una sola empresa compró 379,776 boletos — incluyendo entradas del Eras Tour — usando 49 cuentas distintas para un solo concierto, burlando el límite de 6 boletos por persona. Invirtieron $57 millones y sacaron $64 millones."</em><br><br>
+  Rematen con el dato del DOJ: <em>"Ticketmaster controla más del 80% del mercado primario de grandes venues. En mayo 2024, el Departamento de Justicia de EE.UU. los demandó junto con 30 fiscales estatales. En 2026 acordaron pagar $280 millones. El problema es tan grande que llegó al gobierno."</em>`,
+
+  // S3 OBJETIVO
+  `<span class="cue">Objetivo — ~1.5 min</span>
+  Transición clara: <strong>"Identificamos el problema. Ahora les contamos cómo lo resolvemos."</strong><br><br>
+  Expliquen los tres pilares:<br>
+  1. <em>"Verificación de identidad: una sola persona, máximo 6 boletos, usando OTP y huella digital del dispositivo."</em><br>
+  2. <em>"IA que detecta en tiempo real si alguien está usando bots — velocidad de clics, comportamiento anómalo, patrones de IP."</em><br>
+  3. <em>"Un mercado secundario donde el dueño del boleto decide el precio — con un tope del 120% del valor original."</em><br><br>
+  Mencionen el 80% estimado de reducción en reventas ilegales y que el sistema maneja 10,000 solicitudes por minuto con 99.9% de uptime.`,
+
+  // S4 ALCANCE
+  `<span class="cue">Alcance — ~1.5 min</span>
+  <strong>"Es importante ser honestos sobre lo que entrega la Fase 1."</strong><br><br>
+  Lean la lista de lo incluido y señalen explícitamente lo que va para Fase 2 — esto demuestra madurez técnica y proyectual.<br><br>
+  <em>"En 3 meses tenemos el prototipo. En 9 meses tenemos el piloto con datos reales. A partir de ahí, escalamos."</em><br><br>
+  Si preguntan por presupuesto: <em>"El alcance de Fase 1 es deliberadamente conservador para reducir riesgo. La arquitectura cloud con AWS permite escalar sin rediseñar."</em>`,
+
+  // S5 JUSTIFICACIÓN
+  `<span class="cue">Justificación — ~2 min</span>
+  Aquí refuerzan el "por qué ahora". Usen los datos globales para mostrar que el problema es universal:<br><br>
+  <strong>"En India, 10 millones de personas intentaron comprar 180,000 boletos de Coldplay en 2024. Los que se consiguieron se revendieron a $10,800 USD — cuando el precio original era $145 máximo. En Taiwan, 150,000 boletos de Jay Chou se agotaron en 5 minutos y se revendieron a $9,000 dólares cada uno."</strong><br><br>
+  <em>"El 64% de los consumidores británicos ya expresaron preocupación formal. Las demandas legales son globales. La ventana de oportunidad para posicionarse como la plataforma ética existe ahora."</em>`,
+
+  // S6 REQUERIMIENTO
+  `<span class="cue">Requerimiento Principal — ~2 min</span>
+  Lean la historia de usuario en voz alta — es poderoso porque pone al audiencia en los zapatos del fan.<br><br>
+  Luego expliquen los dos requisitos funcionales:<br>
+  <em>"RF-001 es el corazón del sistema: verificación + límite por IP. RF-002 es lo que lo hace sostenible: un mercado secundario que genera revenue ético."</em><br><br>
+  Conecten con la historia de usuario: <em>"HU-001 tiene prioridad alta, 8 story points estimados, y está directamente relacionada con el caso FTC — Key Investment Group usó exactamente los patrones que SARE detectaría y bloquearía."</em>`,
+
+  // S7 BENEFICIOS
+  `<span class="cue">Beneficios — ~1.5 min</span>
+  <strong>"¿Qué gana el negocio? Seis cosas concretas."</strong><br><br>
+  No lean cada punto — elijan 3 y profundíquenlos:<br>
+  1. <em>"80% menos reventa — eso se traduce en más fans genuinos, menos demandas legales, mejor relación con artistas."</em><br>
+  2. <em>"Ingresos éticos del mercado secundario: comisiones del 5-10% en transferencias reguladas. Revenue nuevo sin controversia."</em><br>
+  3. <em>"Blindaje legal: en un entorno donde Ticketmaster acaba de pagar $280M, llegar al mercado con un sistema compliance-first es ventaja competitiva real."</em><br><br>
+  Mencionen el stack técnico brevemente: Python para IA, React para la interfaz, PostgreSQL + Redis para datos.`,
+
+  // S8 UI
+  `<span class="cue">Interfaz Gráfica — ~1.5 min</span>
+  <strong>"Esto no es solo una idea — tiene interfaz construida."</strong><br><br>
+  Señalen los elementos clave del mockup:<br>
+  <em>"El QR se regenera cada 60 segundos — eso es lo que Ticketmaster llama SafeTix, pero nosotros lo combinamos con la bóveda de identidad. Sin autenticación activa, el QR no existe."</em><br><br>
+  <em>"El login sin contraseña con OTP de 6 dígitos reduce la fricción para el fan mientras mantiene la seguridad máxima. AES-256 — el mismo estándar que usan los bancos."</em><br><br>
+  <em>"Las transferencias son transparentes: el vendedor fija el precio, el sistema valida que no supere el tope y notifica a ambas partes. Trazabilidad total para auditoría."</em>`,
+
+  // S9 DASHBOARD
+  `<span class="cue">Dashboard — ~1 min</span>
+  <strong>"El dashboard no es decorativo — es la herramienta operativa del administrador."</strong><br><br>
+  Señalen las 4 métricas en tiempo real: <em>"Ventas del día, IPs bloqueadas, transferencias reguladas y uptime del sistema."</em><br><br>
+  Señalen las alertas: <em>"Cuando detectamos un bot, aparece en rojo inmediatamente. Cuando una transferencia supera el 110%, va a revisión. Cuando un pago se confirma, registro instantáneo para auditoría."</em><br><br>
+  <em>"Esto es lo que los reguladores van a querer ver: trazabilidad completa, datos accionables, y cumplimiento demostrable en tiempo real."</em>`,
+
+  // S10 CIERRE
+  `<span class="cue">Cierre — ~30 seg</span>
+  No terminen con "eso es todo" o "muchas gracias". Cierren con la propuesta de valor:<br><br>
+  <strong>"SARE no es una mejora incremental a Ticketmaster. Es su reemplazo ético. En un mundo donde el DOJ demanda a las plataformas de boletos, donde la FTC persigue a los revendedores, y donde los fans están hartos — la oportunidad de ser la plataforma justa es real, es ahora, y nosotros tenemos el sistema para hacerla posible."</strong><br><br>
+  Hagan una pausa. Luego: <em>"¿Preguntas?"</em>`
+];
+
+const notesEl=document.getElementById('notesPanel');
+const notesContent=document.getElementById('notesContent');
+let notesOpen=false;
+function toggleNotes(){notesOpen=!notesOpen;notesEl.classList.toggle('open',notesOpen)}
+function updateNotes(){notesContent.innerHTML=NOTES[cur]||'Sin notas para esta diapositiva.'}
+document.getElementById('notesToggle').onclick=toggleNotes;
+document.getElementById('notesClose').onclick=toggleNotes;
+updateNotes();
+
+/* ── QA ── */
+const QA=[
+  {
+    q:"¿Por qué el 80% de reducción en reventas? ¿Tienen datos que soporten esa cifra?",
+    a:"<strong>Respuesta honesta y sólida:</strong> El 80% es una estimación basada en la efectividad comparada de sistemas similares. La plataforma Dice.fm en el Reino Unido, que usa tokens de acceso ligados a identidad, reportó reducciones superiores al 75% en transferencias no autorizadas. Nuestro sistema añade capa de IA sobre eso. Aclaramos que es una proyección de Fase 1 — en el piloto de Fase 2 tendremos datos reales para validarla o corregirla."
+  },
+  {
+    q:"Los scalpers van a usar VPNs para cambiar su IP. ¿Cómo los detienen?",
+    a:"<strong>Esta es la pregunta correcta — y la anticipamos:</strong> IP es solo una capa. El núcleo es FingerprintJS, que genera una huella digital única del dispositivo a partir de 50+ parámetros: canvas fingerprint, WebGL, fuentes del sistema, timing del hardware. Cambiar la IP no cambia la huella. Además, la verificación OTP vincula a una identidad real con número de teléfono o documento. La combinación de tres capas — IP + fingerprint + identidad — hace el ataque exponencialmente más costoso para el revendedor."
+  },
+  {
+    q:"Ticketmaster ya tiene algo parecido con SafeTix. ¿En qué son diferentes?",
+    a:"<strong>Gran pregunta — SafeTix es reactivo, SARE es preventivo:</strong> SafeTix solo protege el acceso al evento (QR dinámico), pero no impide la compra masiva inicial con bots. El DOJ señala explícitamente que SafeTix es una herramienta anticompetitiva porque fuerza las transferencias a pasar por Ticketmaster, generando fees adicionales. SARE protege desde el primer clic de compra, permite transferencias peer-to-peer directas, y no tiene conflicto de interés en las reventas."
+  },
+  {
+    q:"¿Qué impide que alguien cree múltiples cuentas con números de teléfono diferentes?",
+    a:"<strong>Capas adicionales de validación:</strong> El sistema puede requerir verificación por documento de identidad para eventos de alta demanda — configurable por organizador. Además, FingerprintJS detecta cuando el mismo dispositivo crea múltiples cuentas. El caso FTC vs. Key Investment mostró que usaron SIM banks (bancos de tarjetas SIM físicas) — contra eso implementamos análisis de comportamiento: una persona real no registra 500 cuentas en 10 minutos. El rate limiting por dispositivo bloquea esos patrones."
+  },
+  {
+    q:"¿El tope del 120% no es arbitrario? ¿Por qué no el 110% o el 150%?",
+    a:"<strong>Es un parámetro configurable, no fijo:</strong> El 120% es el valor por defecto recomendado basado en el análisis de mercados regulados — Francia tiene topes del 100%, algunos estados de EE.UU. permiten hasta 125%. Lo definimos en el 120% porque cubre costos razonables del vendedor (comisiones, cambio de planes de último minuto) sin abrir espacio a especulación. Pero el organizador del evento puede ajustarlo: 100% para artistas que no quieren ningún sobreprecio, 130% para eventos con alta demanda genuina."
+  },
+  {
+    q:"¿Tienen experiencia real implementando sistemas así? ¿Esto no es solo teoría?",
+    a:"<strong>Honestidad + fortaleza del diseño:</strong> Estamos en fase de prototipado, lo que es consistente con el alcance declarado del proyecto. Las tecnologías que proponemos — FingerprintJS, FastAPI, PostgreSQL, Redis, AWS — son industria estándar con implementaciones documentadas en producción. FingerprintJS tiene más de 6,000 clientes empresariales. La arquitectura no es experimental; la novedad está en la combinación y el modelo de negocio. Fase 1 existe precisamente para pasar de diseño a datos reales."
+  },
+  {
+    q:"¿Cómo manejan la privacidad? Están recolectando datos biométricos e IP de usuarios.",
+    a:"<strong>Privacidad by design, no by compliance:</strong> No recolectamos biométricos — OTP es solo verificación de posesión de un dispositivo, no biometría. Las huellas digitales se hasheadas (SHA-256) antes de almacenarse; nunca guardamos el fingerprint crudo, solo su hash. IPs se almacenan anonimizadas con enmascaramiento de los últimos dos octetos para reportes. Cumplimiento con GDPR y CCPA desde el diseño. Los logs de transacciones son auditables pero no exponen datos personales identificables."
+  },
+  {
+    q:"¿Qué pasa si el sistema bloquea a usuarios legítimos por error?",
+    a:"<strong>Falsos positivos son el mayor riesgo operativo — lo contemplamos:</strong> El sistema tiene tres niveles de alerta: sospechoso (monitoreo), probable bot (requiere verificación adicional), y bloqueado (acción definitiva). Solo el tercer nivel impide la compra. Para el segundo nivel, se presenta un desafío de verificación adicional — similar al CAPTCHA pero más robusto. Existe un proceso de apelación con revisión humana en menos de 2 horas para el día de apertura de ventas. Los falsos positivos son trazables y generan datos para mejorar el modelo."
+  }
+];
+
+const qaList=document.getElementById('qaList');
+QA.forEach((item,i)=>{
+  const div=document.createElement('div');div.className='qa-item';
+  div.innerHTML=`<div class="qa-q"><span>${item.q}</span><span class="qa-icon">+</span></div><div class="qa-a">${item.a}</div>`;
+  div.querySelector('.qa-q').onclick=()=>{
+    const wasOpen=div.classList.contains('expanded');
+    document.querySelectorAll('.qa-item').forEach(d=>d.classList.remove('expanded'));
+    if(!wasOpen)div.classList.add('expanded');
+  };
+  qaList.appendChild(div);
+});
+
+const qaPanel=document.getElementById('qaPanel');
+document.getElementById('qaBtn').onclick=()=>qaPanel.classList.toggle('open');
+document.getElementById('qaClose').onclick=()=>qaPanel.classList.remove('open');
 </script>
 </body>
 </html>
