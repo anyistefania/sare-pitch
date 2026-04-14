@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SARE — Pitch Deck Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050508;--bg2:#0C0C12;--bg3:#131320;--bg4:#1a1a2a;
+  --green:#00FF87;--green2:rgba(0,255,135,0.1);
+  --red:#FF3D57;--red2:rgba(255,61,87,0.1);
+  --gold:#FFD166;--white:#F4F4F8;
+  --muted:rgba(244,244,248,0.5);--faint:rgba(244,244,248,0.08);
+  --border:rgba(244,244,248,0.07);--borderG:rgba(0,255,135,0.2);
+}
+html,body{height:100%;background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow:hidden}
+canvas#bg{position:fixed;inset:0;z-index:0;opacity:.3}
+
+/* ── SLIDE SYSTEM ── */
+.deck{position:relative;z-index:1;width:100vw;height:100vh}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;padding:48px 72px;
+  opacity:0;pointer-events:none;
+  transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);
+  transform:translateY(28px);
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.slide.exit{opacity:0;transform:translateY(-28px)}
+.inner{position:relative;z-index:1;width:100%;max-width:1200px}
+
+/* ── CHROME ── */
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:300;transition:width .5s ease;box-shadow:0 0 10px var(--green)}
+.snum{position:fixed;top:24px;right:36px;font-family:'DM Mono';font-size:11px;color:var(--muted);z-index:300;letter-spacing:2px}
+
+/* ── NAV ── */
+.nav{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:300}
+.nb{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.nb:hover{background:var(--green2);border-color:var(--borderG);color:var(--green)}
+.dots{display:flex;gap:7px;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--faint);border:1px solid rgba(255,255,255,.15);transition:.3s;cursor:pointer}
+.dot.on{background:var(--green);border-color:var(--green);width:18px;border-radius:3px;box-shadow:0 0 6px var(--green)}
+
+/* ── RING CLOSING ── */
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,255,135,.08);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 20s linear infinite}
+.ring2{position:absolute;border-radius:50%;border:1px solid rgba(0,255,135,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin 12s linear infinite reverse}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* ── STAGGER ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .stag>*{animation:fadeUp .5s ease both}
+.slide.active .stag>*:nth-child(1){animation-delay:.05s}
+.slide.active .stag>*:nth-child(2){animation-delay:.12s}
+.slide.active .stag>*:nth-child(3){animation-delay:.19s}
+.slide.active .stag>*:nth-child(4){animation-delay:.26s}
+.slide.active .stag>*:nth-child(5){animation-delay:.33s}
+.slide.active .stag>*:nth-child(6){animation-delay:.40s}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="prog" id="prog" style="width:10%"></div>
+<div class="snum" id="snum">01 / 10</div>
+
+<div class="deck">
+
+<!-- ══ S1: TÍTULO ══ -->
+<div class="slide active" id="s1">
+<div class="inner">
+  <div class="eyebrow">Sistema Anti-Reventa Equitativo · SARE</div>
+  <div class="hero">LA BOLETA<br>ES <span class="g">TUYA.</span><br><span class="d">No de los revendedores.</span></div>
+  <p class="body" style="font-size:18px;max-width:520px">Una plataforma tecnológica que elimina la reventa ilegal, devuelve el control a los fans y crea un mercado secundario verdaderamente justo.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:32px" class="stag">
+    <span class="pill g">● Verificación de Identidad</span><span class="pill">Rastreo IP + Fingerprint</span><span class="pill">IA Anti-Bots</span><span class="pill">Mercado Regulado</span>
+  </div>
+</div>
+</div>
+
+<!-- ══ S2: EL PROBLEMA ══ -->
+<div class="slide" id="s2">
+<div class="inner">
+  <div class="eyebrow">El Problema</div>
+  <div class="h2">El sistema<br>está <span style="color:var(--red)">roto.</span></div>
+  <div class="g3 stag" style="margin-bottom:20px">
+    <div style="text-align:center">
+      <div class="bignum red" style="font-size:clamp(48px,6vw,88px)">$3.4B</div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">mercado global de reventa de boletos en 2024</p>
+      <p class="src">Michigan Journal of Economics, 2025</p>
+    </div>
+    <div style="text-align:center">
+      <div class="bignum red" style="font-size:clamp(48px,6vw,88px)">80%</div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">del mercado primario de grandes venues controlado por Ticketmaster</p>
+      <p class="src">DOJ vs. Live Nation, mayo 2024</p>
+    </div>
+    <div style="text-align:center">
+      <div class="bignum red" style="font-size:clamp(48px,6vw,88px)">70x</div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">el precio original al que se revendieron boletos del Eras Tour de Taylor Swift</p>
+      <p class="src">Sumsub, 2024</p>
+    </div>
+  </div>
+  <div class="g2 stag">
+    <div class="card danger">
+      <div class="ctag r">Caso documentado · FTC, 2025</div>
+      <div class="chead">379,776 boletos. Una sola empresa.</div>
+      <div class="cbody">Key Investment Group compró $57M en boletos usando miles de cuentas falsas y proxies de IP. Los revendió por $64M. Para el Eras Tour, usó 49 cuentas distintas para burlar el límite de 6 boletos por persona en un solo concierto.</div>
+    </div>
+    <div class="card danger">
+      <div class="ctag r">Crisis regulatoria · 2022–2024</div>
+      <div class="chead">14 millones de usuarios, el sistema colapsa</div>
+      <div class="cbody">El pre-sale del Eras Tour (nov. 2022) fue atacado por bots y colapsó Ticketmaster. Resultado: audiencia del Senado en 2023, demanda antimonopolio del DOJ + 30 fiscales estatales en mayo 2024. Live Nation acordó pagar $280M en 2026.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S3: OBJETIVO ══ -->
+<div class="slide" id="s3">
+<div class="inner">
+  <div class="eyebrow">Objetivo</div>
+  <div class="h2" style="margin-bottom:20px">Qué hace <span class="g">SARE.</span></div>
+  <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start">
+    <div>
+      <div class="hl"></div>
+      <p class="body" style="font-size:17px;margin-bottom:24px">Desarrollar e implementar un sistema integral que <strong>elimine la reventa ilegal</strong> mediante verificación de identidad, límites por IP y un mercado secundario con reglas justas donde el precio lo decide el dueño — dentro de topes razonables.</p>
+      <div style="display:flex;flex-direction:column;gap:10px" class="stag">
+        <div class="brow"><div class="bicon">🤖</div><div><div class="btit">Detectar y bloquear bots en tiempo real</div><div class="bdesc">IA analiza velocidad de clics, patrones de sesión y comportamiento anómalo.</div></div></div>
+        <div class="brow"><div class="bicon">🔒</div><div><div class="btit">Verificar identidad única por compra</div><div class="bdesc">OTP + FingerprintJS. 1 persona = máx. 6 boletos por evento.</div></div></div>
+        <div class="brow"><div class="bicon">💸</div><div><div class="btit">Mercado secundario con topes reales</div><div class="bdesc">El vendedor fija su precio. Tope máximo: 120% del valor original.</div></div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card lit" style="text-align:center;padding:28px 20px">
+        <div class="ctag">Reducción estimada</div>
+        <div class="bignum" style="font-size:80px">80%</div>
+        <div class="cbody" style="margin-top:8px">en reventas ilegales con límites por IP/dispositivo</div>
+      </div>
+      <div class="card" style="text-align:center;padding:20px">
+        <div class="ctag">Uptime garantizado</div>
+        <div class="bignum" style="font-size:52px">99.9%</div>
+        <div class="cbody" style="margin-top:4px">cloud auto-escalable · 10,000 req/min en picos</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S4: ALCANCE ══ -->
+<div class="slide" id="s4">
+<div class="inner">
+  <div class="eyebrow">Alcance</div>
+  <div class="h2" style="margin-bottom:24px">¿Qué <span class="g">incluye</span><br>la solución?</div>
+  <div class="g2">
+    <div class="stag">
+      <div class="sr"><span>Plataforma web de venta y gestión</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Verificación de identidad OTP/ID</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Motor rastreo IP + FingerprintJS</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Mercado secundario regulado</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Dashboard de alertas en tiempo real</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Reportes PDF/CSV auditables</span><span class="sb in">Incluido</span></div>
+      <div class="sr"><span>Integración legacy Ticketmaster</span><span class="sb out">Fase 2</span></div>
+      <div class="sr"><span>App móvil nativa</span><span class="sb out">Fase 2</span></div>
+    </div>
+    <div class="card lit" style="padding:22px">
+      <div class="ctag">Hoja de ruta</div>
+      <div class="tl" style="margin-top:14px">
+        <div class="tlr">
+          <div class="tls"><div class="tlc"></div><div class="tlv"></div></div>
+          <div class="tlco"><div class="tlp">Fase 1 · 3 meses</div><div class="tlt">Análisis y prototipado</div><div class="tlsub">Sandbox, pruebas simuladas, arquitectura.</div></div>
+        </div>
+        <div class="tlr">
+          <div class="tls"><div class="tlc" style="background:#00C9FF;box-shadow:0 0 7px #00C9FF"></div><div class="tlv"></div></div>
+          <div class="tlco"><div class="tlp" style="color:#00C9FF">Fase 2 · 6 meses</div><div class="tlt">Piloto con datos reales</div><div class="tlsub">Eventos seleccionados, iteración continua.</div></div>
+        </div>
+        <div class="tlr">
+          <div class="tls"><div class="tlc" style="background:var(--muted);box-shadow:none"></div></div>
+          <div class="tlco"><div class="tlp" style="color:var(--muted)">Fase 3 · Ongoing</div><div class="tlt">Escalado y expansión</div><div class="tlsub">Colaboración regulatoria, crecimiento internacional.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S5: JUSTIFICACIÓN ══ -->
+<div class="slide" id="s5">
+<div class="inner">
+  <div class="eyebrow">Justificación</div>
+  <div class="h2" style="margin-bottom:20px">Por qué<br><span class="g">ahora.</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
+    <div>
+      <div class="hl"></div>
+      <p class="body" style="margin-bottom:18px">La digitalización post-pandemia amplificó el problema a escala global. El 64% de los consumidores británicos expresó preocupación por el scalping y los precios dinámicos. <strong>La regulación existente ya no alcanza.</strong></p>
+      <p class="body" style="margin-bottom:24px">En India, entradas de Coldplay para 2024 llegaron a revenderse a $10,800 USD — originalmente costaban entre $30 y $145. En Taiwan, 150,000 boletos de Jay Chou se agotaron en 5 minutos y revendidos hasta $9,000 USD c/u.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span class="pill g">Consumidores protegidos</span>
+        <span class="pill">Artistas satisfechos</span>
+        <span class="pill">Reguladores conformes</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px" class="stag">
+      <div class="g2">
+        <div style="padding:20px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;text-align:center">
+          <div class="bignum red" style="font-size:48px">64%</div>
+          <p style="font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5">consumidores brit. preocupados por scalping</p>
+          <p class="src">Sumsub, 2024</p>
+        </div>
+        <div style="padding:20px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;text-align:center">
+          <div class="bignum red" style="font-size:48px">$280M</div>
+          <p style="font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5">multa acuerdo DOJ vs. Live Nation, 2026</p>
+          <p class="src">Reuters / Tangle, 2026</p>
+        </div>
+      </div>
+      <div class="card lit">
+        <div class="ctag">Impacto esperado SARE</div>
+        <div class="g2" style="margin-top:10px;gap:12px">
+          <div><div class="bignum" style="font-size:36px">80%</div><p style="font-size:11px;color:var(--muted)">reducción reventa ilegal</p></div>
+          <div><div class="bignum" style="font-size:36px">99%</div><p style="font-size:11px;color:var(--muted)">cumplimiento topes de precio</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S6: REQUERIMIENTO ══ -->
+<div class="slide" id="s6">
+<div class="inner">
+  <div class="eyebrow">Requerimiento Principal</div>
+  <div class="h2" style="margin-bottom:22px">Lo que el sistema<br><span class="g">debe hacer.</span></div>
+  <div class="quote" style="margin-bottom:24px">"Como fan que quiere comprar boletos para un evento, necesito verificar mi identidad una sola vez y estar limitado a máximo 6 boletos por sesión y dispositivo, para que ningún bot ni revendedor pueda acaparar el inventario antes que yo."</div>
+  <div class="g3 stag">
+    <div class="card lit">
+      <div class="ctag">RF-001</div>
+      <div class="chead">Verificación y límite de compra</div>
+      <div class="cbody">OTP + FingerprintJS · Tope 6 boletos/IP en 24h · Bloqueo automático de sesiones sospechosas · Registro en logs auditables.</div>
+    </div>
+    <div class="card lit">
+      <div class="ctag">RF-002</div>
+      <div class="chead">Mercado secundario regulado</div>
+      <div class="cbody">El vendedor fija su precio libremente. Tope máximo 120% del original. Comisión 5–10% a fondo de accesibilidad. Verificación de receptor.</div>
+    </div>
+    <div class="card" style="border-color:rgba(157,143,255,.3);background:rgba(157,143,255,.04)">
+      <div class="ctag" style="color:#9D8FFF">HU-001 · Historia de usuario</div>
+      <div class="chead">Criterios de aceptación</div>
+      <div class="cbody">
+        ✓ Multifactor requerido antes de compra<br>
+        ✓ Bloqueo automático al exceder límite<br>
+        ✓ IA detecta patrones bot en tiempo real<br>
+        ✓ Logs centralizados y auditables<br><br>
+        <span style="font-family:'DM Mono';font-size:10px;color:rgba(157,143,255,.6)">PRIORIDAD ALTA · 8 STORY POINTS</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S7: BENEFICIOS ══ -->
+<div class="slide" id="s7">
+<div class="inner">
+  <div class="eyebrow">Ventajas para el Negocio</div>
+  <div class="h2" style="margin-bottom:24px">Lo que <span class="g">ganas</span><br>con SARE.</div>
+  <div class="g3 stag" style="margin-bottom:16px">
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">📉</div><div class="btit" style="font-size:15px">80% menos reventa ilegal</div><div class="bdesc">Límites por IP y huella digital cortan el flujo de los scalpers desde el primer clic.</div></div>
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">💰</div><div class="btit" style="font-size:15px">Ingresos éticos nuevos</div><div class="bdesc">Comisiones del mercado secundario. Revenue sin dañar la reputación ni infringir regulaciones.</div></div>
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">⚖️</div><div class="btit" style="font-size:15px">Blindaje legal</div><div class="bdesc">Marco normativo alineado con BOTS Act (2016), GDPR y regulaciones locales latinoamericanas.</div></div>
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">⭐</div><div class="btit" style="font-size:15px">Reputación restaurada</div><div class="bdesc">La plataforma líder en equidad. En un post-Ticketmaster escándalo, eso tiene valor comercial enorme.</div></div>
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">🎯</div><div class="btit" style="font-size:15px">Audiencias reales</div><div class="bdesc">Los artistas recuperan control. Fans genuinos en los shows = mejores relaciones comerciales.</div></div>
+    <div class="brow" style="flex-direction:column"><div class="bicon" style="margin-bottom:10px">📊</div><div class="btit" style="font-size:15px">Datos accionables</div><div class="bdesc">Dashboard en tiempo real: IPs bloqueadas, transferencias válidas, tendencias por evento.</div></div>
+  </div>
+  <div class="card" style="padding:12px 20px;border-radius:10px">
+    <p style="font-size:12px;color:var(--muted);text-align:center">Stack: <strong style="color:#fff">Python + FastAPI</strong> (IA/backend) · <strong style="color:#fff">Node.js + React</strong> (frontend) · <strong style="color:#fff">PostgreSQL + Redis</strong> (datos) · <strong style="color:#fff">AWS</strong> · <strong style="color:#fff">FingerprintJS</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ══ S8: INTERFAZ ══ -->
+<div class="slide" id="s8">
+<div class="inner">
+  <div class="eyebrow">Interfaz Gráfica</div>
+  <div class="h2" style="margin-bottom:22px">Se ve <span class="g">así.</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start">
+    <div class="screen">
+      <div class="sbar">
+        <div class="sd" style="background:#FF5F57"></div><div class="sd" style="background:#FEBC2E"></div><div class="sd" style="background:#28C840"></div>
+        <span style="font-size:10px;color:var(--muted);margin-left:8px;font-family:'DM Mono'">sare.io · Mis Boletos</span>
+        <span style="margin-left:auto;font-size:10px;color:var(--green);display:flex;align-items:center;gap:5px"><div class="glowdot"></div>Bóveda activa</span>
+      </div>
+      <div style="padding:18px;background:#080810">
+        <div style="display:flex;justify-content:space-between;margin-bottom:16px;align-items:center">
+          <span style="font-family:'Bebas Neue';font-size:20px;color:var(--green);letter-spacing:1px">SARE</span>
+          <div style="display:flex;gap:12px;font-size:10px;color:var(--muted)">
+            <span>Eventos</span><span style="color:var(--green);border-bottom:1px solid var(--green);padding-bottom:2px">Mis Boletos</span><span>Transferencias</span>
+          </div>
+        </div>
+        <p style="font-family:'DM Mono';font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:5px">GESTIÓN DE ACCESO</p>
+        <p style="font-size:18px;font-weight:700;margin-bottom:12px">Mis Boletos</p>
+        <div style="background:#0d0d18;border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--green);border-radius:10px;padding:12px;margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+            <span style="font-size:8px;padding:2px 8px;background:rgba(0,255,135,.1);color:var(--green);border-radius:50px;letter-spacing:1px">CONFIRMADO</span>
+            <span style="font-size:9px;color:var(--muted);font-family:'DM Mono'">#SARE-8829-XJ</span>
+          </div>
+          <p style="font-size:14px;font-weight:600;margin-bottom:2px">Afterlife CDMX 2024</p>
+          <p style="font-size:10px;color:var(--muted)">14 Nov · Parque Bicentenario</p>
+          <div style="display:flex;gap:7px;margin-top:10px">
+            <button style="flex:1;background:var(--green);border:none;color:#000;font-size:10px;font-weight:700;border-radius:7px;padding:7px;cursor:pointer;font-family:'DM Sans'">Ver Detalles</button>
+            <button style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:10px;border-radius:7px;padding:7px;cursor:pointer;font-family:'DM Sans'">➤ Transferir</button>
+          </div>
+        </div>
+        <p style="font-size:10px;color:rgba(255,255,255,.25);text-align:center;font-family:'DM Mono'">QR regenerado cada 60 seg — capturas inútiles</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px" class="stag">
+      <div class="brow"><div class="bicon">🔒</div><div><div class="btit">QR dinámico anti-captura</div><div class="bdesc">Token que se regenera cada 60 segundos. Hace inútil cualquier screenshot fraudulento.</div></div></div>
+      <div class="brow"><div class="bicon">📱</div><div><div class="btit">Boleto ligado a la cuenta</div><div class="bdesc">Cada acceso requiere autenticación activa. Sin la bóveda, el QR no existe.</div></div></div>
+      <div class="brow"><div class="bicon">💸</div><div><div class="btit">Transferencias transparentes</div><div class="bdesc">El usuario fija su precio. Sistema aplica tope y notifica a las dos partes de la transacción.</div></div></div>
+      <div class="brow"><div class="bicon">📲</div><div><div class="btit">Login sin contraseña (OTP)</div><div class="bdesc">Verificación de 6 dígitos. Encriptación AES-256. Cero fricción para el fan.</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S9: DASHBOARD ══ -->
+<div class="slide" id="s9">
+<div class="inner">
+  <div class="eyebrow">Dashboard</div>
+  <div class="h2" style="margin-bottom:20px">Monitoreo <span class="g">en tiempo real.</span></div>
+  <div class="screen" style="width:100%">
+    <div class="sbar">
+      <div class="sd" style="background:#FF5F57"></div><div class="sd" style="background:#FEBC2E"></div><div class="sd" style="background:#28C840"></div>
+      <span style="font-size:10px;color:var(--muted);margin-left:8px;font-family:'DM Mono'">sare.io · Panel Admin · Tiempo Real</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--green);display:flex;align-items:center;gap:5px"><div class="glowdot"></div>Sistema activo</span>
+    </div>
+    <div style="padding:14px;background:#080810">
+      <div class="g4" style="margin-bottom:12px">
+        <div class="dm"><div class="dml">Vendidos hoy</div><div class="dmv">12,840</div><div class="dmd up">▲ 4.2% vs ayer</div></div>
+        <div class="dm"><div class="dml">IPs bloqueadas</div><div class="dmv" style="color:var(--red)">237</div><div class="dmd dn">▲ 12 en última hora</div></div>
+        <div class="dm"><div class="dml">Transferencias</div><div class="dmv" style="color:var(--green)">1,092</div><div class="dmd up">99.1% cumplimiento</div></div>
+        <div class="dm"><div class="dml">Uptime</div><div class="dmv">99.9%</div><div class="dmd up">SLA cumplido ✓</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:12px">
+        <div style="background:#0d0d18;border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:12px">
+          <p style="font-family:'DM Mono';font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Ventas / hora — hoy</p>
+          <div class="bc">
+            <div class="bcb" style="height:44%"></div><div class="bcb" style="height:58%"></div><div class="bcb" style="height:70%"></div>
+            <div class="bcb" style="height:53%"></div><div class="bcb hi" style="height:100%"></div><div class="bcb" style="height:86%"></div>
+            <div class="bcb" style="height:63%"></div><div class="bcb" style="height:40%"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <p style="font-family:'DM Mono';font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Alertas recientes</p>
+          <div class="ar"><div class="ad" style="background:var(--red)"></div><span style="color:var(--white)">Bot · IP 187.xx · bloqueada</span></div>
+          <div class="ar"><div class="ad" style="background:var(--gold)"></div><span style="color:var(--white)">Transferencia >110% · revisión</span></div>
+          <div class="ar"><div class="ad" style="background:var(--green)"></div><span style="color:var(--white)">Pago confirmado · Afterlife CDMX</span></div>
+          <div class="ar"><div class="ad" style="background:var(--red)"></div><span style="color:var(--white)">5 cuentas · misma IP · bloq.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ S10: CIERRE ══ -->
+<div class="slide" id="s10" style="justify-content:center;align-items:center;text-align:center">
+  <div class="ring" style="width:500px;height:500px"></div>
+  <div class="ring2" style="width:340px;height:340px"></div>
+  <div style="position:relative;z-index:2">
+    <div class="eyebrow" style="justify-content:center">Sistema Anti-Reventa Equitativo · 2024</div>
+    <div style="font-family:'Bebas Neue';font-size:clamp(80px,13vw,170px);line-height:.9;color:var(--green);letter-spacing:2px;text-shadow:0 0 50px rgba(0,255,135,.25)">SARE</div>
+    <p style="font-size:20px;color:var(--muted);margin-top:14px;font-weight:300;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">La boleta es tuya.<br>Y así la vamos a proteger.</p>
+    <div style="display:flex;gap:10px;margin-top:36px;justify-content:center">
+      <span class="pill g">Equidad</span><span class="pill g">Transparencia</span><span class="pill g">Confianza</span>
+    </div>
+    <p style="font-family:'DM Mono';font-size:12px;color:rgba(255,255,255,.15);margin-top:48px;letter-spacing:2px">¿PREGUNTAS?</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- ══ NAV ══ -->
+<div class="nav">
+  <button class="nb" id="prev">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nb" id="next">→</button>
+</div>
+
+
+
+
+<script>
+const cv=document.getElementById('bg'),cx=cv.getContext('2d');let W,H,pts=[];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+function Pt(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.2+.3;this.a=Math.random()*.35+.08}
+Pt.prototype.u=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0)this.x=W;if(this.x>W)this.x=0;if(this.y<0)this.y=H;if(this.y>H)this.y=0};
+rs();for(let i=0;i<100;i++)pts.push(new Pt());window.addEventListener('resize',rs);
+function draw(){cx.clearRect(0,0,W,H);pts.forEach(p=>{p.u();cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle=`rgba(0,255,135,${p.a})`;cx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(0,255,135,${.05*(1-d/90)})`;cx.lineWidth=.4;cx.stroke()}}requestAnimationFrame(draw);}
+draw();
+const slides=document.querySelectorAll('.slide'),total=slides.length;let cur=0;
+const dotsEl=document.getElementById('dots'),progEl=document.getElementById('prog'),snumEl=document.getElementById('snum');
+for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>go(i);dotsEl.appendChild(d)}
+function go(n){if(n===cur)return;slides[cur].classList.remove('active');slides[cur].classList.add('exit');const p=cur;cur=n;setTimeout(()=>slides[p].classList.remove('exit'),550);slides[cur].classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));progEl.style.width=((cur+1)/total*100)+'%';snumEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');}
+document.getElementById('next').onclick=()=>{if(cur<total-1)go(cur+1)};
+document.getElementById('prev').onclick=()=>{if(cur>0)go(cur-1)};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();if(cur<total-1)go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();if(cur>0)go(cur-1)}});
+</script>
+</body>
+</html>
